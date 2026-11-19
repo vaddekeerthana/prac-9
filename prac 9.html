@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Metaverse - Virtual World Experience">
+<title>METAVERSE | Virtual World Experience</title>
+
+<style>
+
+:root {
+    --navy: #25245a;
+    --blue: #5145cd;
+    --light-blue: #eef0ff;
+    --green: #9b59b6;
+    --dark-green: #663399;
+    --text: #25245a;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background: linear-gradient(
+        180deg,
+        #f2f0ff 0%,
+        #ffffff 55%,
+        #f5edff 100%
+    );
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 12px 6%;
+    background: rgba(255,255,255,.96);
+    box-shadow: 0 3px 15px rgba(37,36,90,.10);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.brand img {
+    width: 78px;
+    height: 78px;
+    object-fit: contain;
+}
+
+.brand-name {
+    margin: 0;
+    color: var(--navy);
+    font-size: 1.45rem;
+    letter-spacing: 1px;
+}
+
+.brand-tagline {
+    margin: 4px 0 0;
+    color: var(--green);
+    font-size: .78rem;
+    font-weight: bold;
+}
+
+/* NAVIGATION */
+
+nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+nav a {
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: .95rem;
+}
+
+nav a:hover {
+    color: var(--green);
+}
+
+/* HERO SECTION */
+
+.hero {
+    position: relative;
+    min-height: 410px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 65px 7% 80px;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(81,69,205,.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(155,89,182,.18),
+            transparent 28%
+        );
+
+    overflow: hidden;
+}
+
+/* FLOATING PARTICLES */
+
+.particle-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    bottom: -20px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #8065ff, #c084fc);
+    box-shadow: 0 0 10px #9b59b6;
+    opacity: 0;
+    animation: floatUp var(--fall-duration, 3s)
+        linear var(--fall-delay, 0s) infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: .8;
+    }
+
+    90% {
+        opacity: .7;
+    }
+
+    100% {
+        transform: translateY(-470px);
+        opacity: 0;
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h2 {
+    color: var(--navy);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin: 0 0 14px;
+}
+
+.hero p {
+    max-width: 760px;
+    line-height: 1.7;
+    font-size: 1.08rem;
+    margin: 0 auto 24px;
+}
+
+/* BUTTONS */
+
+.primary-btn,
+.control-btn {
+    border: 0;
+    border-radius: 25px;
+    padding: 12px 23px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: .95rem;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.primary-btn {
+    color: white;
+    background: linear-gradient(
+        90deg,
+        var(--blue),
+        var(--green)
+    );
+    text-decoration: none;
+    display: inline-block;
+}
+
+.primary-btn:hover,
+.control-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(37,36,90,.18);
+}
+
+/* MOVING TEXT */
+
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background: var(--navy);
+    color: white;
+    padding: 15px 0;
+}
+
+.ticker {
+    width: max-content;
+    white-space: nowrap;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding-left: 100vw;
+    animation: slideText 18s linear infinite;
+}
+
+@keyframes slideText {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.ticker.paused {
+    animation-play-state: paused;
+}
+
+/* ANIMATION CONTROLS */
+
+.controls {
+    text-align: center;
+    padding: 12px;
+    background: #eef0ff;
+}
+
+.control-btn {
+    color: var(--navy);
+    background: white;
+    border: 1px solid #d5caff;
+    margin: 4px;
+}
+
+/* SECTIONS */
+
+section {
+    padding: 55px 7%;
+}
+
+.section-title {
+    text-align: center;
+    color: var(--navy);
+    font-size: 2rem;
+    margin: 0 0 12px;
+}
+
+.section-intro {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+}
+
+/* APPLICATION CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    border-radius: 17px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 7px 24px rgba(37,36,90,.09);
+    border: 1px solid #e4ddfa;
+    animation: riseIn .8s ease both;
+}
+
+.card:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.card:nth-child(3) {
+    animation-delay: .3s;
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    animation: gentleFloat 3s ease-in-out infinite;
+    display: inline-block;
+}
+
+.card h3 {
+    color: var(--green);
+    margin: 12px 0 8px;
+}
+
+.card p {
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+@keyframes riseIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gentleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* METAVERSE FACTS */
+
+.tip-box {
+    max-width: 800px;
+    margin: auto;
+    padding: 28px;
+    text-align: center;
+    background: #f1edff;
+    border-left: 5px solid var(--green);
+    border-radius: 12px;
+}
+
+#tipText {
+    min-height: 48px;
+    line-height: 1.6;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    color: white;
+    background: var(--navy);
+    padding: 25px 15px;
+}
+
+footer p {
+    margin: 6px;
+}
+
+/* TABLET AND MOBILE RESPONSIVE DESIGN */
+
+@media (max-width: 760px) {
+
+    header {
+        flex-direction: column;
+        padding: 10px 4%;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .brand img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        min-height: 350px;
+        padding: 50px 6%;
+    }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="brand">
+
+        <img src="metaverse logo.png"
+             alt="Metaverse Logo">
+
+        <div>
+
+            <h1 class="brand-name">METAVERSE</h1>
+
+            <p class="brand-tagline">
+                VIRTUAL WORLD EXPERIENCE
+            </p>
+
+        </div>
+
+    </div>
+
+    <nav aria-label="Main navigation">
+
+        <a href="#home">Home</a>
+
+        <a href="#about">About</a>
+
+        <a href="#services">Applications</a>
+
+        <a href="#tips">Explore</a>
+
+    </nav>
+
+</header>
+
+<main>
+
+<!-- HERO SECTION -->
+
+<section class="hero" id="home">
+
+    <div class="particle-layer" id="particleLayer"
+         aria-hidden="true"></div>
+
+    <div class="hero-content">
+
+        <h2>Explore Beyond Reality</h2>
+
+        <p>
+            Metaverse connects people through virtual reality,
+            augmented reality and artificial intelligence.
+            Experience a new digital world where imagination
+            becomes reality.
+        </p>
+
+        <a class="primary-btn" href="#services">
+            Explore Metaverse
+        </a>
+
+    </div>
+
+</section>
+
+<!-- MOVING MESSAGE -->
+
+<div class="ticker-wrap"
+     aria-label="Metaverse message">
+
+    <div class="ticker" id="ticker">
+
+        EXPLORE VIRTUAL WORLDS • CONNECT WITH PEOPLE •
+        EXPERIENCE DIGITAL REALITY • DISCOVER THE FUTURE •
+
+    </div>
+
+</div>
+
+<!-- ANIMATION CONTROLS -->
+
+<div class="controls">
+
+    <button class="control-btn"
+            id="pauseBtn"
+            type="button">
+        Pause Animation
+    </button>
+
+    <button class="control-btn"
+            id="playBtn"
+            type="button">
+        Play Animation
+    </button>
+
+</div>
+
+<!-- ABOUT SECTION -->
+
+<section id="about">
+
+    <h2 class="section-title">
+        About Metaverse
+    </h2>
+
+    <p class="section-intro">
+
+        Metaverse is a digital virtual environment that
+        connects people through advanced technologies
+        such as Virtual Reality (VR), Augmented Reality (AR)
+        and Artificial Intelligence. It allows users to
+        interact, communicate, explore virtual spaces,
+        attend events and experience digital activities
+        in an immersive three-dimensional world.
+
+    </p>
+
+</section>
+
+<!-- APPLICATIONS SECTION -->
+
+<section id="services">
+
+    <h2 class="section-title">
+        Our Metaverse Applications
+    </h2>
+
+    <p class="section-intro">
+
+        Discover how Metaverse technology transforms
+        education, gaming, entertainment and communication.
+
+    </p>
+
+    <div class="cards">
+
+        <article class="card">
+
+            <span class="card-icon"
+                  aria-hidden="true">🥽</span>
+
+            <h3>Virtual Reality</h3>
+
+            <p>
+                Experience immersive digital environments
+                using virtual reality technology.
+            </p>
+
+        </article>
+
+        <article class="card">
+
+            <span class="card-icon"
+                  aria-hidden="true">🎮</span>
+
+            <h3>Virtual Gaming</h3>
+
+            <p>
+                Explore interactive virtual games and
+                enjoy realistic digital experiences.
+            </p>
+
+        </article>
+
+        <article class="card">
+
+            <span class="card-icon"
+                  aria-hidden="true">🎓</span>
+
+            <h3>Virtual Education</h3>
+
+            <p>
+                Learn through interactive virtual classrooms
+                and digital learning environments.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+<!-- EXPLORE SECTION -->
+
+<section id="tips">
+
+    <h2 class="section-title">
+        Explore Metaverse
+    </h2>
+
+    <div class="tip-box">
+
+        <p id="tipText">
+
+            Metaverse creates an interactive digital world
+            where people can connect and explore.
+
+        </p>
+
+        <button class="primary-btn"
+                id="tipBtn"
+                type="button">
+
+            Discover More
+
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        <strong>METAVERSE</strong> – VIRTUAL WORLD EXPERIENCE
+    </p>
+
+    <p>
+        EXPLORE BEYOND REALITY
+    </p>
+
+    <p>
+        © 2026 Metaverse. All Rights Reserved.
+    </p>
+
+</footer>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+// FLOATING PARTICLES
+
+const particleLayer =
+    document.getElementById("particleLayer");
+
+for (let i = 0; i < 42; i++) {
+
+    const particle = document.createElement("span");
+
+    particle.className = "particle";
+
+    particle.style.left =
+        (Math.random() * 100) + "%";
+
+    particle.style.setProperty(
+        "--fall-duration",
+        (2.1 + Math.random() * 2.2) + "s"
+    );
+
+    particle.style.setProperty(
+        "--fall-delay",
+        (-Math.random() * 4.5) + "s"
+    );
+
+    particle.style.opacity =
+        (0.35 + Math.random() * 0.5).toFixed(2);
+
+    particleLayer.appendChild(particle);
+
+}
+
+// MOVING TEXT CONTROLS
+
+const ticker = document.getElementById("ticker");
+
+const pauseBtn = document.getElementById("pauseBtn");
+
+const playBtn = document.getElementById("playBtn");
+
+pauseBtn.addEventListener("click", function () {
+
+    ticker.classList.add("paused");
+
+});
+
+playBtn.addEventListener("click", function () {
+
+    ticker.classList.remove("paused");
+
+});
+
+// METAVERSE FACTS
+
+const tips = [
+
+    "Metaverse uses Virtual Reality to create immersive digital environments.",
+
+    "Augmented Reality combines digital objects with the real world.",
+
+    "Virtual classrooms allow students to experience interactive learning.",
+
+    "Metaverse supports virtual meetings and online collaboration.",
+
+    "Virtual gaming provides interactive three-dimensional experiences."
+
+];
+
+let tipIndex = 0;
+
+document.getElementById("tipBtn")
+    .addEventListener("click", function () {
+
+        tipIndex = (tipIndex + 1) % tips.length;
+
+        document.getElementById("tipText").textContent =
+            tips[tipIndex];
+
+    });
+
+</script>
+
+</body>
+</html>
